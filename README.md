@@ -23,14 +23,14 @@ java -jar products.jar
 
 ### Implemented Features
 
-#### GET http://localhost:8080/products/{product id}
+#### GET http://localhost:8080/products/{product_id}
 - Aggregates information from RedSky endpoint and embedded MongoDB instance of pricing information
 - Provides reduced response with appropriate error message if RedSky knows the product, but pricing database doesn't
 - Short circuits aggregation if the product is not available in RedSky (responds with 404 w/o trying to get more data)
 - Validates the product id to make sure it's valid (greater than or equal to 0)
 - Metric to measure how often the endpoint gets called and how long it takes to complete the operation
 
-#### PUT http://localhost:8080/products/{product id}
+#### PUT http://localhost:8080/products/{product_id}
 - Validates the product id to make sure it's valid (greater than or equal to 0)
 - Validates the request body to make sure it's valid
     - Price must be greater than or equal to 0
@@ -45,7 +45,7 @@ java -jar products.jar
 **PUT Request Example**
 ```json
 {
-	"id": 123456789, // ignored
+	"id": 123456789, //ignored
 	"description": "New Description", //ignored
 	"current_price": {
 		"value": 39.99,
@@ -79,3 +79,4 @@ java -jar products.jar
 - **Evaluate NoSql** repository of pricing data against requirements and usage of the products endpoints. What's more important with pricing data? Consistency? Availability? etc.
 - **Parallelize** retrieval of data from upstream sources as more are added to reduce the overall time spent gathering data at the expense of computing resources
 - **Externalize** job to load and maintain a repository of valid ISO 4217 currency codes (if these don't change often, a flat file resource loaded into memory on startup would suffice)
+- **Version** the endpoint (`products/v1` if standalone or `/v1/products` if part of a larger API) to help with change management if contract breaking modifications are required.

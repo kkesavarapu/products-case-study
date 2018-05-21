@@ -8,7 +8,7 @@ Given this service is a case study, I prioritized making it easy to run locally 
 **Requirements**
 - Java 8
 - Internet Connection (to reach RedSky)
-- Compiled Binary: <TODO: URL>
+- Compiled Binary: https://github.com/kkesavarapu/products-case-study/releases/download/v0.0.1/products.jar
 
 ```
 java -jar products.jar
